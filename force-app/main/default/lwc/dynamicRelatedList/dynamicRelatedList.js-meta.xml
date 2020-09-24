@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>47.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__RecordPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="title" label="Title" type="String" description="Title of the section" required="true" default="Contacts"/>
+            <property name="headerIcon" label="Header Icon" type="String" description="(Optional) Icon to display in header" required="false" default="custom:custom4"/>
+            <property name="footer" label="Footer" type="String" description="(Optional) Text to display in footer"/>
+            <property name="objectName" label="Object Name" type="String" description="API name of object to display records" required="true" default="Account"/>
+            <property name="fieldSetName" label="Fieldset Name" type="String" description="API Name of object fieldset to be used to display fields as columns (Default = true)" required="true"/>
+            <property name="actionFieldName" label="Action Field Name" type="String" description="(Optional) Field to display link for detail view" required="false"/>
+            <property name="filters" label="Filters" type="String" description="(Optional) SOQL query filters to be used to filter records" required="false"/>
+            <property name="sortByFieldName" label="Sort by" type="String" description="(Optional) Field to be used for sorting" required="false"/>
+            <property name="sortDescending" label="Sort Descending" type="Boolean" description="(Optional) Sorts data in descending order (Default = false)" required="false" default="false"/>
+            <property name="maxRecords" label="Maximum number of records to display" type="Integer" description="(Optional) Maximum number of records to display (Default = 5)" required="false" default="5"/>
+            <supportedFormFactors>
+                <supportedFormFactor type="Large"></supportedFormFactor>
+                <supportedFormFactor type="Small"></supportedFormFactor>
+            </supportedFormFactors>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

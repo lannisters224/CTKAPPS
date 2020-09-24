@@ -1,0 +1,77 @@
+<!--
+ *     Copyright 2020 Cynoteck @ http://www.cynoteck.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+
+<template>
+    
+    <lightning-card class=" my-card">
+        <div slot="title" >
+            <h2 class="slds-page-header slds-card__header-link" data-aura-class="forceRelatedListCardHeader">
+                <lightning-icon icon-name={headerIcon} size="small"></lightning-icon>
+                &nbsp;&nbsp;&nbsp;{title} ({recordCount})
+            </h2>
+        </div>
+
+        <div slot="footer" if:true={footer}>
+            {footer}
+        </div>
+        <!-- LAPTOP/TABLET : Display data in tiles -->
+        <div if:false={isPhoneFactor}>
+            <p class="slds-p-horizontal_small">
+                
+                <c-rich-text-data-table
+                    hide-checkbox-column="true"
+                    key-field="id"
+                    data={records}
+                    errors={error}
+                    is-loading = {isLoading}
+                    onrowaction={navigateToRecord}
+                    onsort={updateColumnSorting}
+                    columns={columns}
+                    sorted-by={sortByFieldName}
+                    sorted-direction={sortDirection}>
+                </c-rich-text-data-table>
+
+
+            </p>
+        </div>
+        <!-- PHONE : Display data in tiles -->
+        <div if:true={isPhoneFactor}>
+            <ul class="slds-has-dividers_bottom-space">
+                <template for:each={records} for:item="item">
+                    <li class="slds-item" key={item.id}>
+                        <lightning-tile label="" href="#" type="media">
+                            <lightning-avatar slot="media" fallback-icon-name={headerIcon} alternative-text=""></lightning-avatar>
+                            
+                                <template iterator:it={columns}>
+                            
+                                        <div key={it.value.fieldName}>
+                                            <div if:true={it.first}>
+                                                <b><c-dynamic-Output-Field obj-record={item} field-name={it.value.fieldName}></c-dynamic-Output-Field></b>
+                                            </div>
+                                            <div if:false={it.first}>
+                                                <c-dynamic-Output-Field obj-record={item} field-name={it.value.fieldName}></c-dynamic-Output-Field>
+                                            </div>
+                                        </div>
+                            
+                                </template>
+                            
+                        </lightning-tile>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
+</template>
